@@ -6,6 +6,9 @@ trigger:
   branch:
     - master
 
+environment:
+  DRONE_BUILD_EVENT: tag
+
 steps:
   - name: build
     image: emptyshadow/eltech-book-builder
