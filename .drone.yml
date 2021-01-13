@@ -21,7 +21,7 @@ steps:
       - git config --local user.name "${USERNAME}"
       - git config --local user.email "${EMAIL}"
       - export DRONE_TAG=pdf-release-v${DRONE_BUILD_NUMBER}
-      - git tag -f ${DRONE_TAG}
+      - git tag -f $DRONE_TAG
   - name: release pages
     image: plugins/gh-pages
     settings:
