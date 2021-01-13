@@ -8,7 +8,7 @@ trigger:
 
 steps:
   - name: build book
-    image: node
+    image: node:9.11
     environment:
       USERNAME:
         from_secret: github_username
