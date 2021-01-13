@@ -9,12 +9,16 @@ trigger:
 steps:
   - name: build book
     image: node:9.11
+    volumes:
+      - name: cache
+        path: /tmp/cache
     environment:
       USERNAME:
         from_secret: github_username
       EMAIL:
         from_secret: github_email
     commands:
+      - echo $PATH
       - apt-get -qq update
       - apt-get install -y calibre
       - mv ebook-convert /usr/local/bin/
