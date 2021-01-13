@@ -15,9 +15,9 @@ steps:
       EMAIL:
         from_secret: github_email
     commands:
-      - sudo apt-get -qq update
-      - sudo apt-get install -y calibre
-      - sudo mv ebook-convert /usr/local/bin/
+      - apt-get -qq update
+      - apt-get install -y calibre
+      - mv ebook-convert /usr/local/bin/
       - npm install gitbook-cli -g
       - gitbook install
       - gitbook build && gitbook pdf
