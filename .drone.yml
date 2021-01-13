@@ -9,7 +9,7 @@ trigger:
     - push
 
 steps:
-  - name: build
+  - name: tagging
     image: alpine/git
     environment:
       USERNAME:
@@ -17,8 +17,8 @@ steps:
       EMAIL:
         from_secret: github_email
     commands:
-      - git config --local user.name "${USERNAME}"
-      - git config --local user.email "${EMAIL}"
+      - git config --local user.name $USERNAME
+      - git config --local user.email $EMAIL
       - export DRONE_TAG=pdf-release-v${DRONE_BUILD_NUMBER}
       - git tag -f $DRONE_TAG
       - git push -f origin $DRONE_TAG
