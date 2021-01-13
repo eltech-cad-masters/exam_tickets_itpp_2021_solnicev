@@ -21,7 +21,7 @@ steps:
       - git config --local user.email "${EMAIL}"
       - export DRONE_TAG=pdf-release-v${DRONE_BUILD_NUMBER}
       - git tag -f $DRONE_TAG
-      - git push -f $DRONE_TAG
+      - git push -f origin $DRONE_TAG
 
 ---
 
