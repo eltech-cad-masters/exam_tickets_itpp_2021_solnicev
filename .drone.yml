@@ -21,11 +21,9 @@ steps:
     commands:
       - git config --local user.name $USERNAME
       - git config --local user.email $EMAIL
-      - git config --local credential.helper store
-      - echo "https://${USERNAME}:${PASSWORD}@github.com" > ~/.git-credentials
       - export DRONE_TAG=pdf-release-v${DRONE_BUILD_NUMBER}
       - git tag -f $DRONE_TAG
-      - git push -f origin $DRONE_TAG
+      - echo $USERNAME | echo $PASSWORD | git push -f origin $DRONE_TAG
 
 ---
 
