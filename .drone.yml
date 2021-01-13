@@ -1,0 +1,49 @@
+kind: pipeline
+type: docker
+name: tickets book
+
+trigger:
+  branch:
+    - master
+
+steps:
+  - name: build book
+    image: node
+    environment:
+      USERNAME:
+        from_secret: github_username
+      EMAIL:
+        from_secret: github_email
+    commands:
+      - sudo apt-get -qq update
+      - sudo apt-get install -y calibre
+      - sudo mv ebook-convert /usr/local/bin/
+      - npm install gitbook-cli -g
+      - gitbook install
+      - gitbook build && gitbook pdf
+      - git config --local user.name "${USERNAME}"
+      - git config --local user.email "${EMAIL}"
+      - export DRONE_TAG=pdf-release-v${DRONE_BUILD_NUMBER}
+      - git tag -f ${DRONE_TAG}
+  - name: release pages
+    image: plugins/gh-pages
+    settings:
+      username:
+        from_secret: github_username
+      password:
+        from_secret: github_password
+      pages_directory: ./_book
+    when:
+      event:
+        tag
+  - name: release books
+    image: plugins/github-release
+    settings:
+      api_key:
+        from_secret: github_token
+      files:
+        - ./book.pdf
+      file_exists: overwrite
+    when:
+      event:
+        tag
