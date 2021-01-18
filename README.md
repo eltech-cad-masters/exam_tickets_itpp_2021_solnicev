@@ -11,7 +11,7 @@
 
 **Преподаватель:** Сольницев
 
-**Семестр:** 9
+**Семестр:** 11
 
 [Скачать книжку](https://github.com/eltech-cad-masters/exam_tickets_itpp_2021_solnicev/releases/latest)
 
